@@ -1,36 +1,20 @@
-public class RewardValue {
-    
-    private double cashValue;  // Stores the value in cash
-    private double milesValue; // Stores the value in miles
-    private final double MILES_TO_CASH_RATE = 0.0035; // Conversion rate from miles to cash
+import java.util.Scanner;
 
-    // Constructor that accepts a cash value
-    public RewardValue(double cashValue) {
-        this.cashValue = cashValue;
-        this.milesValue = cashValue / MILES_TO_CASH_RATE;
-    }
-
-    // Constructor that accepts a value in miles
-    public RewardValue(int milesValue) {
-        this.milesValue = milesValue;
-        this.cashValue = milesValue * MILES_TO_CASH_RATE;
-    }
-
-    // Method to get the cash value
-    public double getCashValue() {
-        return cashValue;
-    }
-
-    // Method to get the value in miles
-    public double getMilesValue() {
-        return milesValue;
-    }
-
+public class RewardsConverter {
     public static void main(String[] args) {
-        RewardValue cashReward = new RewardValue(10.00); // $10 reward
-        System.out.println("Cash reward of $10 is worth: " + cashReward.getMilesValue() + " miles.");
-
-        RewardValue milesReward = new RewardValue(5000); // 5000 miles reward
-        System.out.println("Miles reward of 5000 miles is worth: $" + milesReward.getCashValue());
+        var scanner = new Scanner(System.in);
+        System.out.println("Welcome to the Credit Card Rewards Converter!");
+        System.out.println("Please enter a cash value to convert to airline miles: ");
+        var input_value = scanner.nextLine();
+        double cashValue;
+        try {
+            cashValue = Double.parseDouble(input_value);
+        } catch (NumberFormatException exception) {
+            System.out.println("Could not parse input value as a double, exiting");
+            return;
+        }
+        System.out.println("converting $" + input_value + " to miles");
+        var rewardsValue = new RewardValue(cashValue);
+        System.out.println("$" + input_value + " is worth " + rewardsValue.getMilesValue() + " miles");
     }
 }
